@@ -1,35 +1,39 @@
 #pragma once
 
-#include <windows.h>
-#include <sysinfoapi.h> // Time
+// Input/output
 #include <iostream>
+
+// Windows specific APIs
+#include <windows.h>
+
+// Time
+#include <sysinfoapi.h> // Time
+
+#include <ctime>
 
 class Debug
 {
 private:
-	// System time
-	SYSTEMTIME st; // , lt;
+	/**
+	 * System time
+	*/
+	struct tm newTime;
+	time_t now = time(0);
+	localtime_s(&newTime, &now);
+
+
 public:
+	/**
+	 * Default constructor
+	*/
 	Debug()
 	{
-		initSystime();
 	}
 
 	void log(std::string msg)
 	{
-		// Time
-		std::cout << "[ " << st.wHour + 1 << ":" << st.wMinute << ":" << st.wSecond << " ] ";
-
-		// Message
-		std::cout << msg << std::endl;
-	}
-
-private:
-	/**
-	 * @brief Initialize system time for debugging
-	*/
-	void initSystime()
-	{
-		GetSystemTime(&st);
+		std::cout << "[" << now->tm_mday << '.'
+			<< now->tm_mon + 1 << '.'
+			<< now->tm_year + 1990 << '\n';
 	}
 };
