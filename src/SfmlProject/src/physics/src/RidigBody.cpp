@@ -3,7 +3,11 @@
 
 RigidBody::RigidBody() : Physics()
 {
-	position = sf::Vector2f(200, 200);
 }
 
 RigidBody::~RigidBody() { }
+
+void RigidBody::updatePhysics(sf::Transformable &shape)
+{
+	applyGravity(shape);
+}

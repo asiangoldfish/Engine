@@ -6,10 +6,11 @@
 
 class RigidBody : public Physics
 {
-private:
-	sf::Vector2f position;
-
 public:
 	RigidBody();
 	virtual ~RigidBody();
+
+	// Update physics
+	void updatePhysics(sf::Transformable &shape);
+
 };

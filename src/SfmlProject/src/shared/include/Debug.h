@@ -30,4 +30,5 @@ public:
 	 * @param msg 
 	*/
 	void log(std::string msg, bool includeTime=true);
+	void log(int msg, bool includeTime=true);
 };

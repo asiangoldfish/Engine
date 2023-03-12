@@ -13,7 +13,7 @@
 #include "shared/include/Debug.h"
 
 // Physics test
-#include "physics/testPerson.cpp"
+#include "physics/include/testPerson.h"
 
 
 class Engine

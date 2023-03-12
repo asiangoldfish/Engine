@@ -40,11 +40,33 @@ int main()
                     window->close();
                     break;
 
-                case sf::Event::MouseButtonPressed:
-                    engine->getPerson()->jump();
+                //case sf::Event::MouseButtonPressed:
+                //    break;
+
+                case sf::Event::KeyPressed:
+                    // Quit game
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+                        window->close();
+
+                    // Jump
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                        engine->getPerson()->jump();                    
                     break;
             }
         }
+
+        float speed = 5;
+
+        // Move right
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            engine->getPerson()->move(-speed, 0);
+        }
+
+        // Move left
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            engine->getPerson()->move(speed, 0);
+
         engine->draw();
 
     }

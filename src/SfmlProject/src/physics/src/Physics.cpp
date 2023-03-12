@@ -11,14 +11,28 @@ Physics::~Physics()
 {
 }
 
-void Physics::updatePosition(sf::Transformable &t)
+void Physics::applyGravity(sf::Transformable &t)
 {
 	float dt = clock.restart().asSeconds();
-	velocity += gravityAcceleration * gravityModifier;
-	t.setPosition(
-		t.getPosition().x,
-		t.getPosition().y + velocity * dt
-	);
+
+	if (t.getPosition().y >= 600)
+	{
+		velocity = 0;
+		t.setPosition(
+			t.getPosition().x,
+			600 - 0.001
+		);
+	}
+	else
+	{
+		velocity += gravityAcceleration * gravityModifier;
+		t.setPosition(
+			t.getPosition().x,
+			t.getPosition().y + velocity * dt
+		);
+	}
 }
 
 void Physics::addVelocity(float vel) { velocity += vel; }
+
+void Physics::addThrust(float t) { velocity = -t; }

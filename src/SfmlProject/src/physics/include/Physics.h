@@ -23,7 +23,9 @@ public:
 
 	virtual ~Physics();
 
-	void updatePosition(sf::Transformable &t);
+	void applyGravity(sf::Transformable &t);
 
 	void addVelocity(float vel);
+
+	void addThrust(float t);
 };
