@@ -9,18 +9,15 @@
 // Time
 #include <sysinfoapi.h> // Time
 
+#include <chrono>
 #include <ctime>
 
 class Debug
 {
 private:
-	/**
-	 * System time
-	*/
-	struct tm newTime;
-	time_t now = time(0);
-	localtime_s(&newTime, &now);
-
+	// System time
+	time_t now;
+	tm ltm;						// Time struct
 
 public:
 	/**
@@ -28,12 +25,28 @@ public:
 	*/
 	Debug()
 	{
+		now = time(0);
 	}
 
-	void log(std::string msg)
+	/**
+	 * Log message with date
+	 * @param msg 
+	*/
+	void log(std::string msg, bool includeTime=true)
 	{
-		std::cout << "[" << now->tm_mday << '.'
-			<< now->tm_mon + 1 << '.'
-			<< now->tm_year + 1990 << '\n';
+		if (includeTime)
+		{
+			now = time(0);				// Update time
+			localtime_s(&ltm, &now);	// local time
+		
+			std::cout
+				// Date
+				<< '[' << ltm.tm_mday << '.' << ltm.tm_mon << '.' << 1900 + ltm.tm_year << ' '
+				// Time
+				<< ltm.tm_hour << ':' << ltm.tm_min << ':' << ltm.tm_sec << "] ";
+		}
+
+		// Message
+		std::cout << msg << '\n';
 	}
 };
