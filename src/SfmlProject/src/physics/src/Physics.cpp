@@ -15,13 +15,9 @@ void Physics::applyGravity(sf::Transformable &t)
 {
 	float dt = clock.restart().asSeconds();
 
-	if (t.getPosition().y >= 600)
+	if (t.getPosition().y > 600.0)
 	{
 		velocity = 0;
-		t.setPosition(
-			t.getPosition().x,
-			600 - 0.001
-		);
 	}
 	else
 	{
@@ -35,4 +31,14 @@ void Physics::applyGravity(sf::Transformable &t)
 
 void Physics::addVelocity(float vel) { velocity += vel; }
 
-void Physics::addThrust(float t) { velocity = -t; }
+void Physics::addThrust(float t, sf::Transformable& trans) 
+{
+	if (!velocity)
+	{
+		trans.setPosition(
+			trans.getPosition().x,
+			trans.getPosition().y - 10
+		);
+		velocity = -t; 
+	}
+}

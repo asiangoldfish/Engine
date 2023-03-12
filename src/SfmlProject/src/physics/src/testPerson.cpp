@@ -20,7 +20,7 @@ void Person::setPosition(float x, float y)
 	shape.setPosition(x, y);
 }
 
-void Person::jump() { addThrust(500); }
+void Person::jump() { addThrust(500, shape); }
 
 void Person::move(float x, float y)
 {

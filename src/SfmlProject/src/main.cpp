@@ -49,7 +49,7 @@ int main()
                         window->close();
 
                     // Jump
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
                         engine->getPerson()->jump();                    
                     break;
             }

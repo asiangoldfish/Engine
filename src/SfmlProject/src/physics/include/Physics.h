@@ -27,5 +27,5 @@ public:
 
 	void addVelocity(float vel);
 
-	void addThrust(float t);
+	void addThrust(float t, sf::Transformable& trans);
 };
