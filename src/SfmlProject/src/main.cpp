@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-#include "core/Engine.hpp"
-#include "shared/debug.hpp"
+#include "core/include/Engine.h"
+#include "shared/include/Debug.h"
 
 void closeGame(std::vector<void*> ptr);
 
@@ -37,17 +37,16 @@ int main()
             switch (event.type)
             {
                 case sf::Event::Closed:
-                    //window->close();
-                    debug.log("Lukker programmet...\n");
+                    window->close();
                     break;
 
-            /*
                 case sf::Event::MouseButtonPressed:
+                    engine->getPerson()->jump();
                     break;
-            */
             }
         }
         engine->draw();
+
     }
 
     // Deallocate memory
