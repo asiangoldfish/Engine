@@ -3,7 +3,7 @@
 Engine::Engine()
 {
 	window = new sf::RenderWindow();
-	debug = Debug();
+	debug = Logger();
 }
 
 /**
@@ -18,7 +18,7 @@ Engine::Engine(sf::VideoMode videoMode, std::string title, int fps)
 	window->create(videoMode, title);
 	window->setFramerateLimit(fps);
 
-	debug = Debug();
+	debug = Logger();
 
 	// Initialize fonts and texts
 	if (!opensans.loadFromFile("data/fonts/OpenSans-Regular.ttf"))

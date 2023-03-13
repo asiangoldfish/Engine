@@ -24,7 +24,7 @@
     <ClCompile Include="src\physics\src\Physics.cpp" />
     <ClCompile Include="src\physics\src\RidigBody.cpp" />
     <ClCompile Include="src\physics\src\testPerson.cpp" />
-    <ClCompile Include="src\shared\src\Debug.cpp" />
+    <ClCompile Include="src\shared\src\Logger.cpp" />
     <ClCompile Include="src\shared\src\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="src\physics\include\Physics.h" />
     <ClInclude Include="src\physics\include\RidigBody.h" />
     <ClInclude Include="src\physics\include\testPerson.h" />
-    <ClInclude Include="src\shared\include\Debug.h" />
+    <ClInclude Include="src\shared\include\Logger.h" />
     <ClInclude Include="src\shared\include\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

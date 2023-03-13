@@ -10,7 +10,7 @@
 
 // Custom
 #include "shared/include/Math.h"
-#include "shared/include/Debug.h"
+#include "shared/include/Logger.h"
 
 // Physics test
 #include "physics/include/testPerson.h"
@@ -23,7 +23,7 @@ private:
 	sf::RenderWindow* window;
 
 	// Debugger
-	Debug debug;
+	Logger debug;
 
 	// Fonts and texts
 	sf::Font opensans;

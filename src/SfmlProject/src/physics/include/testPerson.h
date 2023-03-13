@@ -3,14 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include "physics/include/RidigBody.h"
 
-#include "shared/include/Debug.h"
+#include "shared/include/Logger.h"
 
 class Person : public RigidBody
 {
 private:
 	sf::CircleShape shape;
 
-	Debug debug;
+	Logger debug;
 
 public:
 	Person();

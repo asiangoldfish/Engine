@@ -4,7 +4,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "core/include/Engine.h"
-#include "shared/include/Debug.h"
+#include "shared/include/Logger.h"
 
 void closeGame(std::vector<void*> ptr);
 
@@ -20,7 +20,7 @@ int main()
     sf::Vector2i mousePos;
 
     // Debugger
-    Debug debug = Debug();
+    Logger debug = Logger();
 
     ptr.push_back(engine);
     ptr.push_back(window);

@@ -4,19 +4,19 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "shared/include/Debug.h"
+#include "shared/include/Logger.h"
 
 class Physics
 {
 private:
-	const float gravityAcceleration = 9.8f;
-	float gravityModifier;
-	float velocity;
+	const float gravityAcceleration = 9.8f;		///< Gravitational acceleration
+	float gravityModifier;	///< Gravitational acceleration modifier
+	sf::Vector2f velocity;	///< Velocity at any given point in time
 
 	sf::Clock clock;
 
 protected:
-	Debug debug;
+	Logger debug;
 
 public:
 	Physics();

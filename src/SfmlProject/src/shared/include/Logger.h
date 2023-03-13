@@ -12,18 +12,21 @@
 #include <chrono>
 #include <ctime>
 
-class Debug
+class Logger
 {
 private:
 	// System time
-	time_t now;
-	tm ltm;						// Time struct
+	time_t now;					///< Current time
+	tm ltm;						///< Time struct
+
+private:
+	void _printTime(bool includeTime);
 
 public:
 	/**
 	 * Default constructor
 	*/
-	Debug();
+	Logger();
 
 	/**
 	 * Log message with date
