@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-#include "core/Engine.hpp"
-#include "shared/debug.hpp"
+#include "core/include/Engine.h"
+#include "shared/include/Logger.h"
 
 void closeGame(std::vector<void*> ptr);
 
@@ -20,7 +20,7 @@ int main()
     sf::Vector2i mousePos;
 
     // Debugger
-    Debug debug = Debug();
+    Logger debug = Logger();
 
     ptr.push_back(engine);
     ptr.push_back(window);
@@ -40,13 +40,35 @@ int main()
                     window->close();
                     break;
 
-            /*
-                case sf::Event::MouseButtonPressed:
+                //case sf::Event::MouseButtonPressed:
+                //    break;
+
+                case sf::Event::KeyPressed:
+                    // Quit game
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+                        window->close();
+
+                    // Jump
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+                        engine->getPerson()->jump();                    
                     break;
-            */
             }
         }
+
+        float speed = 5;
+
+        // Move right
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            engine->getPerson()->move(-speed, 0);
+        }
+
+        // Move left
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            engine->getPerson()->move(speed, 0);
+
         engine->draw();
+
     }
 
     // Deallocate memory
