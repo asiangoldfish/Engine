@@ -23,5 +23,7 @@ Networking test is the project for networking with asio.
 
     Remember to separate each argument with a semicolon `;`.
 
+Tutorial: https://www.youtube.com/watch?v=2hNdkYInj4g&t=474s
+
 
 # Game launcher tutorial
