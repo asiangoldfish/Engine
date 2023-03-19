@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="GameLauncher.View.UserControls.Sidepanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:userControls="clr-namespace:GameLauncher.View.UserControls"
+             
+             mc:Ignorable="d"
+             Width="150"
+             d:DesignHeight="450">
+    
+    <!-- Sidepanel -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnPatchNotes"
+                Grid.Row="0"
+                Content="Patch Notes" 
+                FontSize="20"
+                Click="btnPatchNotes_Click"/>
+        
+        <Button x:Name="btnSettings"
+                Grid.Row="1" 
+                Content="Settings" 
+                FontSize="20"
+                Click="btnSettings_Click"/>
+
+        <Button x:Name="btnGithub"
+                Grid.Row="2" 
+                Content="GitHub" 
+                FontSize="20"
+                Click="btnGithub_Click"/>
+
+        <Rectangle Grid.Row="3" Fill="DarkGray"/>
+        
+        <Button x:Name="btnQuit"
+                Grid.Row="4"
+                Content="Quit"
+                FontSize="20"
+                Click="btnQuit_Click"/>
+    </Grid>
+</UserControl>

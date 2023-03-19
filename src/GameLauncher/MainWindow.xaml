@@ -1,0 +1,64 @@
+﻿<Window x:Class="GameLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameLauncher"
+
+        xmlns:userControls="clr-namespace:GameLauncher.View.UserControls"
+        
+        mc:Ignorable="d"
+        Title="Launcher" Height="400" Width="720"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <userControls:Sidepanel Grid.Column="0"/>
+        
+        <!-- Main content-->
+        <Grid Grid.Column="1">
+            <!-- Main content grid definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Login -->
+            <Grid Grid.Row="0">
+                <userControls:Login Height="50"
+                                    Width="230" 
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"/>
+                <Rectangle Panel.ZIndex="-1"
+                           Fill="LightGray"
+                           Focusable="True"/>
+            </Grid>
+            
+            <!-- Game Status -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar Grid.Column="0"/>
+                <Button x:Name="btnUpdate"
+                        Grid.Column="1"
+                        Content="Update"
+                        Click="btnUpdate_Click"/>
+                <Button x:Name="btnStartGame"
+                        Grid.Column="2"
+                        Content="Start Game"
+                        Click="btnStartGame_Click"/>
+            </Grid>
+        </Grid>
+
+        
+    </Grid>
+    
+</Window>
