@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
@@ -22,18 +23,25 @@
         <Button x:Name="btnPatchNotes"
                 Grid.Row="0"
                 Content="Patch Notes" 
-                FontSize="20"/>
+                FontSize="20"
+                Click="btnPatchNotes_Click"/>
         
         <Button x:Name="btnSettings"
                 Grid.Row="1" 
                 Content="Settings" 
                 FontSize="20"
                 Click="btnSettings_Click"/>
-        
-        <Rectangle Grid.Row="2" Fill="DarkGray"/>
+
+        <Button x:Name="btnGithub"
+                Grid.Row="2" 
+                Content="GitHub" 
+                FontSize="20"
+                Click="btnGithub_Click"/>
+
+        <Rectangle Grid.Row="3" Fill="DarkGray"/>
         
         <Button x:Name="btnQuit"
-                Grid.Row="3"
+                Grid.Row="4"
                 Content="Quit"
                 FontSize="20"
                 Click="btnQuit_Click"/>

@@ -44,9 +44,17 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <ProgressBar Grid.Column="0"/>
-                <Button Grid.Column="1" Content="Start Game" />
+                <Button x:Name="btnUpdate"
+                        Grid.Column="1"
+                        Content="Update"
+                        Click="btnUpdate_Click"/>
+                <Button x:Name="btnStartGame"
+                        Grid.Column="2"
+                        Content="Start Game"
+                        Click="btnStartGame_Click"/>
             </Grid>
         </Grid>
 
