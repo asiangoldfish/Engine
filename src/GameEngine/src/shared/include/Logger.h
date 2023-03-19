@@ -1,15 +1,5 @@
 #pragma once
 
-// Input/output
-#include <iostream>
-
-// Windows specific APIs
-#include <windows.h>
-
-// Time
-#include <sysinfoapi.h> // Time
-
-#include <chrono>
 #include <ctime>
 
 class Logger

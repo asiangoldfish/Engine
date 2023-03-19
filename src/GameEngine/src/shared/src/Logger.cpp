@@ -1,3 +1,11 @@
+#include <iostream>
+
+// Windows specific APIs
+#include <windows.h>
+
+// Time
+#include <sysinfoapi.h> // Time
+#include <chrono>
 #include "shared/include/Logger.h"
 
 void Logger::_printTime(bool includeTime)

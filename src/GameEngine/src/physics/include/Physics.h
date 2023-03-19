@@ -1,9 +1,6 @@
 #pragma once
 
-#include <cmath>
-
 #include <SFML/Graphics.hpp>
-
 #include "shared/include/Logger.h"
 
 class Physics

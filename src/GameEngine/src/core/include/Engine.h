@@ -1,20 +1,9 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include <vector>
-#include <sstream>
-#include <iomanip>
 
 // SFML
 #include <SFML/Graphics.hpp>
-
-// Custom
-#include "shared/include/Math.h"
-#include "shared/include/Logger.h"
-
-// Physics test
+#include <shared/include/Logger.h>
 #include "physics/include/testPerson.h"
-
 
 class Engine
 {

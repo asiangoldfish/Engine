@@ -4,9 +4,6 @@
 
 #pragma once
 
-#include <random>
-#include <iostream>
-
 const float PI = 3.1415f;
 
 /**

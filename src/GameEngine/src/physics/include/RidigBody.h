@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "physics/include/Physics.h"
 
 class RigidBody : public Physics

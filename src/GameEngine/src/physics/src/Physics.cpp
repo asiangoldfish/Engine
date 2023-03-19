@@ -1,5 +1,11 @@
 #include "physics/include/Physics.h"
 
+#include <cmath>
+
+#include <SFML/Graphics.hpp>
+
+#include "shared/include/Logger.h"
+
 Physics::Physics()
 {
 	gravityModifier = 1;

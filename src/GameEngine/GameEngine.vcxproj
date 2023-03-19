@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\networking\src\networking.cpp" />
     <ClCompile Include="src\physics\src\Physics.cpp" />
     <ClCompile Include="src\physics\src\RidigBody.cpp" />
     <ClCompile Include="src\physics\src\testPerson.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\include\Engine.h" />
+    <ClInclude Include="src\networking\include\networking.h" />
     <ClInclude Include="src\physics\include\Physics.h" />
     <ClInclude Include="src\physics\include\RidigBody.h" />
     <ClInclude Include="src\physics\include\testPerson.h" />

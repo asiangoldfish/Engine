@@ -1,5 +1,18 @@
 #include <core/include/Engine.h>
 
+#include <string>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+
+// Custom
+#include "shared/include/Math.h"
+#include "shared/include/Logger.h"
+
+// Physics test
+#include "physics/include/testPerson.h"
+
 Engine::Engine()
 {
 	window = new sf::RenderWindow();
