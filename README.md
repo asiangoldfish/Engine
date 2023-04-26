@@ -9,3 +9,6 @@
 - Extract the library at [src/SfmlProject/deps/SFML](./src/SfmlProject/deps/SFML)
 
 # Game launcher tutorial
+
+# GUI Editor
+https://www.youtube.com/watch?v=vWXrFetSH8w
