@@ -4,11 +4,6 @@
 
 #pragma once
 
-#include <random>
-#include <iostream>
-
-const float PI = 3.1415f;
-
 /**
  * @brief Linear interpolation between start and end value
  * @param start Start value

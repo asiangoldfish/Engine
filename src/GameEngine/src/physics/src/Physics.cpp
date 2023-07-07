@@ -4,7 +4,6 @@ Physics::Physics()
 {
 	gravityModifier = 1;
 	velocity = sf::Vector2f(0, 100);
-	debug = Logger();
 }
 
 Physics::~Physics()

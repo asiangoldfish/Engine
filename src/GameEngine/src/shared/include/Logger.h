@@ -1,16 +1,6 @@
 #pragma once
 
-// Input/output
-#include <iostream>
-
-// Windows specific APIs
-#include <windows.h>
-
-// Time
-#include <sysinfoapi.h> // Time
-
-#include <chrono>
-#include <ctime>
+#include <SFML/Graphics.hpp>
 
 class Logger
 {
@@ -20,18 +10,18 @@ private:
 	tm ltm;						///< Time struct
 
 private:
-	void _printTime(bool includeTime);
+	void printTime();
+	Logger();
+	static void _log(bool includeTime);
 
 public:
-	/**
-	 * Default constructor
-	*/
-	Logger();
+	static Logger& getInstance();
 
 	/**
 	 * Log message with date
 	 * @param msg 
 	*/
-	void log(std::string msg, bool includeTime=true);
-	void log(int msg, bool includeTime=true);
+	static void log(std::string msg, bool includeTime=true);
+	static void log(int msg, bool includeTime=true);
+	static void log(std::string msg, sf::Vector2f vec, bool includeTime = true);
 };

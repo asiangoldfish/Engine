@@ -10,8 +10,6 @@ class Person : public RigidBody
 private:
 	sf::CircleShape shape;
 
-	Logger debug;
-
 public:
 	Person();
 

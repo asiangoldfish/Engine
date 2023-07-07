@@ -22,9 +22,6 @@ private:
 	// Window related data
 	sf::RenderWindow* window;
 
-	// Debugger
-	Logger debug;
-
 	// Fonts and texts
 	sf::Font opensans;
 	sf::Text scoreText;

@@ -19,8 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\src\GameTime.cpp" />
+    <ClCompile Include="src\core\src\BasicShape.cpp" />
     <ClCompile Include="src\core\src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\physics\src\Emitter.cpp" />
+    <ClCompile Include="src\physics\src\Particle.cpp" />
     <ClCompile Include="src\physics\src\Physics.cpp" />
     <ClCompile Include="src\physics\src\RidigBody.cpp" />
     <ClCompile Include="src\physics\src\testPerson.cpp" />
@@ -28,7 +32,11 @@
     <ClCompile Include="src\shared\src\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\core\include\BasicShape.h" />
     <ClInclude Include="src\core\include\Engine.h" />
+    <ClInclude Include="src\core\include\GameTime.h" />
+    <ClInclude Include="src\physics\include\Emitter.h" />
+    <ClInclude Include="src\physics\include\Particle.h" />
     <ClInclude Include="src\physics\include\Physics.h" />
     <ClInclude Include="src\physics\include\RidigBody.h" />
     <ClInclude Include="src\physics\include\testPerson.h" />

@@ -15,9 +15,6 @@ private:
 
 	sf::Clock clock;
 
-protected:
-	Logger debug;
-
 public:
 	Physics();
 

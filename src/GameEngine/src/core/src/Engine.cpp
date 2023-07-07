@@ -1,9 +1,10 @@
 #include <core/include/Engine.h>
 
+#include "shared/include/Logger.h"
+
 Engine::Engine()
 {
 	window = new sf::RenderWindow();
-	debug = Logger();
 }
 
 /**
@@ -17,8 +18,6 @@ Engine::Engine(sf::VideoMode videoMode, std::string title, int fps)
 	window = new sf::RenderWindow();
 	window->create(videoMode, title);
 	window->setFramerateLimit(fps);
-
-	debug = Logger();
 
 	// Initialize fonts and texts
 	if (!opensans.loadFromFile("data/fonts/OpenSans-Regular.ttf"))
@@ -35,7 +34,7 @@ Engine::Engine(sf::VideoMode videoMode, std::string title, int fps)
 	// Test physics
 	p.setPosition(200, window->getSize().y/2);
 
-	debug.log("Game initialized!");
+	Logger::log("Game initialized!");
 }
 
 Person *Engine::getPerson() { return &p; }
@@ -60,11 +59,7 @@ Engine::~Engine()
  */
 void Engine::draw()
 {
-	window->clear();
-
 	p.draw(window);
-
-	window->display();
 }
 
 sf::RenderWindow *Engine::getWindow()

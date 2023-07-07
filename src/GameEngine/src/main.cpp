@@ -4,7 +4,9 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "core/include/Engine.h"
-#include "shared/include/Logger.h"
+#include "core/include/GameTime.h"
+#include "physics/include/Emitter.h"
+#include "physics/include/Particle.h"
 
 void closeGame(std::vector<void*> ptr);
 
@@ -19,8 +21,10 @@ int main()
     // Mouse
     sf::Vector2i mousePos;
 
-    // Debugger
-    Logger debug = Logger();
+    // Particle system
+    Emitter emitter;
+    emitter.setMaxCount(10);
+    emitter.setEmitterVisibility(true);
 
     ptr.push_back(engine);
     ptr.push_back(window);
@@ -67,8 +71,23 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             engine->getPerson()->move(speed, 0);
 
+        window->clear();
+
         engine->draw();
 
+        emitter.setPosition(sf::Vector2f{ (float)mousePos.x, (float)mousePos.y });
+
+        for (int i = 0; i < 10; i++)
+        {
+            Particle p;
+            emitter.addParticle(p);
+        }
+        emitter.draw(window);
+
+        window->display();
+
+        Logger::log(GameTime::getDeltaTime());
+        GameTime::updateTime();
     }
 
     // Deallocate memory
