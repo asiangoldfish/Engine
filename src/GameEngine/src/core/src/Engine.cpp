@@ -1,43 +1,13 @@
-#include <core/include/Engine.h>
-
 #include "shared/include/Logger.h"
+#include "core/include/GameTime.h"
+
+#include <core/include/Engine.h>
 
 Engine::Engine()
 {
-	window = new sf::RenderWindow();
+	// Default client window
+	window.create(sf::VideoMode(200, 200), "Game");
 }
-
-/**
- * @brief Creates window
- * @param videoMode Screen size
- * @param title Window class name and displayed window title
- */
-Engine::Engine(sf::VideoMode videoMode, std::string title, int fps)
-{
-	// Initialize main game window
-	window = new sf::RenderWindow();
-	window->create(videoMode, title);
-	window->setFramerateLimit(fps);
-
-	// Initialize fonts and texts
-	if (!opensans.loadFromFile("data/fonts/OpenSans-Regular.ttf"))
-	{
-		std::cerr << "ERROR: Could not load OpenSans font from file\n";
-	}
-
-	scoreText.setFont(opensans);
-	scoreText.setCharacterSize(20);
-	scoreText.setString("NONE");
-	int width = scoreText.getGlobalBounds().width;
-	scoreText.setPosition(window->getSize().x / 2.f - width * 2, 20.f);
-
-	// Test physics
-	p.setPosition(200, window->getSize().y/2);
-
-	Logger::log("Game initialized!");
-}
-
-Person *Engine::getPerson() { return &p; }
 
 /**
  * @brief Destructor
@@ -46,9 +16,21 @@ Person *Engine::getPerson() { return &p; }
  */
 Engine::~Engine()
 {
-	// Window
-	delete window;
-	window = nullptr;
+}
+
+int Engine::init()
+{
+	return 0;
+}
+
+void Engine::closeEngine()
+{
+}
+
+void Engine::stopGameLoop()
+{
+	// Invoke SFML's close function
+	window.close();
 }
 
 /**
@@ -59,10 +41,37 @@ Engine::~Engine()
  */
 void Engine::draw()
 {
-	p.draw(window);
 }
 
-sf::RenderWindow *Engine::getWindow()
+void Engine::clearScreen()
+{
+	window.clear();
+}
+
+void Engine::update()
+{
+	mousePos = sf::Mouse::getPosition(window);
+	GameTime::updateTime();
+	window.display();
+}
+
+sf::RenderWindow& Engine::getWindow()
 {
 	return window;
+}
+
+void Engine::setTitle(std::string title)
+{
+	windowTitle = title;
+	window.setTitle(title);
+}
+
+void Engine::setVideoMode(sf::VideoMode mode)
+{
+	window.create(mode, windowTitle);
+}
+
+void Engine::setFps(int fps)
+{
+	window.setFramerateLimit(fps);
 }

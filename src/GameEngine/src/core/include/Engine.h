@@ -20,13 +20,14 @@ class Engine
 {
 private:
 	// Window related data
-	sf::RenderWindow* window;
+	sf::RenderWindow window;	///< Main game client window
+	std::string windowTitle;	///< Client window title
 
-	// Fonts and texts
-	sf::Font opensans;
-	sf::Text scoreText;
+	// Mouse
+	sf::Vector2i mousePos;		///< Mouse position relative to client window
 
-	Person p;
+	// Events
+	sf::Event event;
 
 // Initializations
 public:
@@ -39,22 +40,17 @@ public:
 	Engine();
 
 	/**
-	 * @brief Creates window
-	 * @param videoMode Screen size
-	 * @param title Window class name and displayed window title
-	*/
-	Engine(sf::VideoMode videoMode, std::string title, int fps);
-
-	Person *getPerson();
-
-	/**
 	* @brief Destructor
 	* 
 	* Deallocates and releases memory
 	*/
 	~Engine();
 
-// Rendering
+	int init();
+	void closeEngine();
+	void stopGameLoop();
+	bool isOpen() { return window.isOpen(); }
+
 public:
 	/**
 	 * @brief Draw things to screen.
@@ -63,8 +59,24 @@ public:
 	 * to the screen
 	*/
 	void draw();
+	
+	void clearScreen();
 
-// Enemies game logic
+	/**
+	 * @brief To be called every frame.
+	 * Updates necessary internal engine components on per frame basis
+	*/
+	void update();
+
+	bool pollEvent() { return window.pollEvent(event); }
+
 public:
-	sf::RenderWindow* getWindow();
+	sf::RenderWindow& getWindow();
+	
+	// Window properties
+	void setTitle(std::string title);
+	void setVideoMode(sf::VideoMode mode);
+	void setFps(int fps);
+
+	sf::Event getEvent() { return event; }
 };
