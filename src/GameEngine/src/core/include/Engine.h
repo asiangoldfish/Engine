@@ -1,19 +1,13 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include <vector>
-#include <sstream>
-#include <iomanip>
-
 // SFML
 #include <SFML/Graphics.hpp>
+
+#include <pch.h>
 
 // Custom
 #include "shared/include/Math.h"
 #include "shared/include/Logger.h"
-
-// Physics test
-#include "physics/include/testPerson.h"
+#include "core/include/GameTime.h"
 
 
 class Engine
@@ -28,6 +22,14 @@ private:
 
 	// Events
 	sf::Event event;
+
+public:
+	// Time
+	GameTime gameTime;
+
+// Internal engine events
+private:
+	void _onInit();
 
 // Initializations
 public:
@@ -46,7 +48,6 @@ public:
 	*/
 	~Engine();
 
-	int init();
 	void closeEngine();
 	void stopGameLoop();
 	bool isOpen() { return window.isOpen(); }
@@ -68,6 +69,8 @@ public:
 	*/
 	void update();
 
+// Events
+public:
 	bool pollEvent() { return window.pollEvent(event); }
 
 public:
@@ -79,4 +82,6 @@ public:
 	void setFps(int fps);
 
 	sf::Event getEvent() { return event; }
+
+	GameTime* getGameTime() { return &gameTime;  }
 };

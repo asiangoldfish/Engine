@@ -1,7 +1,7 @@
-#include <vector>
-
 // External libraries
 #include <SFML/Graphics.hpp>
+
+#include <pch.h>
 
 // Custom libraries
 #include "physics/include/Particle.h"

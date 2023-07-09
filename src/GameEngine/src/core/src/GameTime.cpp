@@ -1,20 +1,17 @@
-#include "SFML/Graphics.hpp"
-
-#include "core/include/GameTime.h"
+#include "../include/GameTime.h"
+#include "shared/include/Logger.h"
 
 GameTime::GameTime()
 {
-	elapsedTime = 0.f;
-}
-
-GameTime& GameTime::getInstance()
-{
-	static GameTime gt;
-	return gt;
+	elapsedTime = 0;
 }
 
 void GameTime::updateTime()
 {
-	GameTime::getInstance().elapsedTime += GameTime::getInstance().deltaClock.restart().asMilliseconds();
+	elapsedTime += deltaClock.restart().asMilliseconds();
 }
 
+int GameTime::getDeltaTime()
+{
+	return deltaClock.getElapsedTime().asMilliseconds();
+}

@@ -6,6 +6,10 @@
 
 Particle::Particle()
 {
+	maxLifetime = 0;
+	lifetime = 0;
+	isDead = false;
+	id = 0;
 }
 
 void Particle::draw(sf::RenderTarget* target)

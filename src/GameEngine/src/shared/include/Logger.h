@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <pch.h>
+
 class Logger
 {
 private:
@@ -36,6 +38,7 @@ public:
 	 * @param msg 
 	*/
 	static void debug(std::string msg, bool includeTime=true);
-	static void debug(int msg, bool includeTime=true);
+	static void debug(int msg, bool includeTime = true);
+	static void debug(float msg, bool includeTime=true);
 	static void debug(std::string msg, sf::Vector2f vec, bool includeTime = true);
 };

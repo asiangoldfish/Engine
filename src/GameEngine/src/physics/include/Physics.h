@@ -1,8 +1,7 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 #include <cmath>
-
-#include <SFML/Graphics.hpp>
 
 #include "shared/include/Logger.h"
 

@@ -1,26 +1,31 @@
 #include "shared/include/Logger.h"
+#include "core/include/Engine.h"
+
 #include "core/include/GameTime.h"
 
-#include <core/include/Engine.h>
 
 Engine::Engine()
 {
-	// Default client window
-	window.create(sf::VideoMode(200, 200), "Game");
+	_onInit();
+
+	// Set member variable default values
 }
 
 /**
  * @brief Destructor
- *
  * Deallocates and releases memory
  */
 Engine::~Engine()
 {
 }
 
-int Engine::init()
+void Engine::_onInit()
 {
-	return 0;
+	Logger::debug("Starting time...");
+	
+	// Setup window properties
+	window.create(sf::VideoMode(200, 200), "Game");
+	setFps(30);
 }
 
 void Engine::closeEngine()
@@ -51,7 +56,7 @@ void Engine::clearScreen()
 void Engine::update()
 {
 	mousePos = sf::Mouse::getPosition(window);
-	GameTime::updateTime();
+	gameTime.updateTime();
 	window.display();
 }
 

@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#include <pch.h>
+
 #include "core/include/Engine.h"
 
 int main()
@@ -10,7 +12,6 @@ int main()
     // Game loop
     while (engine.isOpen())
     {
-
         // Handle events
         while (engine.pollEvent())
         {

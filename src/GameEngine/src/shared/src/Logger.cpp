@@ -60,7 +60,7 @@ void Logger::debug(std::string msg, bool includeTime)
 	_log(includeTime);
 
 	// Message
-	std::cout << "LOGGER: " << msg << '\n';
+	std::cout << "DEBUG: " << msg << '\n';
 }
 
 void Logger::debug(int msg, bool includeTime)
@@ -68,7 +68,15 @@ void Logger::debug(int msg, bool includeTime)
 	_log(includeTime);
 
 	// Message
-	std::cout << "LOGGER: " << msg << '\n';
+	std::cout << "DEBUG: " << msg << '\n';
+}
+
+void Logger::debug(float msg, bool includeTime)
+{
+	_log(includeTime);
+
+	// Message
+	std::cout << "DEBUG: " << msg << '\n';
 }
 
 void Logger::debug(std::string msg, sf::Vector2f vec, bool includeTime)
