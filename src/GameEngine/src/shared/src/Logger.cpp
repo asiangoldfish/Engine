@@ -1,11 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-// Input/output
-#include <iostream>
-#include <iomanip>
-
-// Windows specific APIs
-#include <windows.h>
+#include <pch.h>
 
 // Time
 #include <sysinfoapi.h> // Time
@@ -60,7 +55,7 @@ Logger& Logger::getInstance()
  * Log message with date
  * @param msg 
 */
-void Logger::log(std::string msg, bool includeTime)
+void Logger::debug(std::string msg, bool includeTime)
 {
 	_log(includeTime);
 
@@ -68,7 +63,7 @@ void Logger::log(std::string msg, bool includeTime)
 	std::cout << "LOGGER: " << msg << '\n';
 }
 
-void Logger::log(int msg, bool includeTime)
+void Logger::debug(int msg, bool includeTime)
 {
 	_log(includeTime);
 
@@ -76,7 +71,7 @@ void Logger::log(int msg, bool includeTime)
 	std::cout << "LOGGER: " << msg << '\n';
 }
 
-void Logger::log(std::string msg, sf::Vector2f vec, bool includeTime)
+void Logger::debug(std::string msg, sf::Vector2f vec, bool includeTime)
 {
 	_log(includeTime);
 	std::cout << msg << "(" << vec.x << ", " << vec.y << ")" << std::endl;
