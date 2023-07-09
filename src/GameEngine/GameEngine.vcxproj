@@ -23,6 +23,9 @@
     <ClCompile Include="src\core\src\BasicShape.cpp" />
     <ClCompile Include="src\core\src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\physics\src\Emitter.cpp" />
     <ClCompile Include="src\physics\src\Particle.cpp" />
     <ClCompile Include="src\physics\src\Physics.cpp" />
@@ -35,6 +38,7 @@
     <ClInclude Include="src\core\include\BasicShape.h" />
     <ClInclude Include="src\core\include\Engine.h" />
     <ClInclude Include="src\core\include\GameTime.h" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\physics\include\Emitter.h" />
     <ClInclude Include="src\physics\include\Particle.h" />
     <ClInclude Include="src\physics\include\Physics.h" />
@@ -164,6 +168,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)deps\SFML\include\</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
