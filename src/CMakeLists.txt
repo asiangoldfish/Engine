@@ -1,19 +1,29 @@
-# Set the minimum required CMake version
-cmake_minimum_required(VERSION 3.12)
+# ProjectRoot/src/CMakeLists.txt
 
-# Set the project name
-project(GameEngine)
+# Find SFML package
+find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
-# Add compiler flags or options if needed
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall")
+# Add the main executable and link modules
+add_executable(out main.cpp)
 
-# Add the subdirectories for each module
-add_subdirectory(rendering)
-add_subdirectory(physics)
+# Include directories for modules
+#target_include_directories(out PRIVATE
+#    ${CMAKE_CURRENT_SOURCE_DIR}/core/include
+#    ${CMAKE_CURRENT_SOURCE_DIR}/shared/include
+#)
+
+# Add subdirectories for each module
+add_subdirectory(core)
 add_subdirectory(events)
-# Add more subdirectories for additional modules as needed
+add_subdirectory(physics)
+#add_subdirectory(rendering)
+add_subdirectory(shared)
 
-# Add the main executable or library target
-# add_executable(GameEngine main.cpp)
-# target_link_libraries(GameEngine PUBLIC RenderingModule PhysicsModule EventsModule ...)
-
+# Link the modules to the main executable
+target_link_libraries(out PRIVATE
+    core
+    events
+    physics 
+    #rendering 
+    shared
+)

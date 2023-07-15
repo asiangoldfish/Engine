@@ -1,11 +1,13 @@
 #!/bin/bash
 
-DIRPATH="$( dirname "$0" )"
+DIRPATH="$( echo "$PWD" )"
+SCRIPTS="$DIRPATH/tools/development_scripts"
 
 # Imports
-source "$DIRPATH/scripts/help.sh"
-source "$DIRPATH/scripts/doxygen.sh"
-source "$DIRPATH/scripts/module.sh"
+source "$SCRIPTS/help.sh"
+source "$SCRIPTS/doxygen.sh"
+source "$SCRIPTS/module.sh"
+source "$SCRIPTS/cmake.sh"
 
 #####################################
 ### The script's main entry point ###
@@ -41,6 +43,34 @@ while [ "$1" != "" ]; do
             ;;
         -d | --doxygen )
             generate_doxygen_docs   # scripts/doxygen.sh
+            exit 0
+            ;;
+        -c | --clean )
+            cmake_clean
+            exit 0
+            ;;
+        -cb | --clean-build )
+            cmake_clean &&
+            cmake_build
+            exit 0
+            ;;
+        -cbr | --clean-build-run )
+            cmake_clean &&
+            cmake_build &&
+            cmake_run
+            exit 0
+            ;;
+        -b | --build )
+            cmake_build &&
+            exit 0
+            ;;
+        -r | --run )
+            cmake_build &&
+            cmake_run &&
+            exit 0
+            ;;
+        --continuous-build )
+            cmake_continous_build
             exit 0
             ;;
         * )
