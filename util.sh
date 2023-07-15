@@ -2,18 +2,26 @@
 
 DIRPATH="$( dirname "$0" )"
 
-# imports
+# Imports
 source "$DIRPATH/scripts/help.sh"
 source "$DIRPATH/scripts/doxygen.sh"
 source "$DIRPATH/scripts/module.sh"
 
+#####################################
+### The script's main entry point ###
+#####################################
+
+# Help page on no arguments
 if [ "$#" -eq 0 ]; then
     display_help
     exit 0
 fi
 
+# Parse arguments
 while [ "$1" != "" ]; do
     case $1 in
+    
+        # Help pages. The user may also get help page for sub commands by saying ex. --help --new-module
         -h | --help )
             case "$2" in
                 --new-module | -n )
@@ -28,17 +36,17 @@ while [ "$1" != "" ]; do
             exit 0
             ;;
         -n | --new-module )
-            create_module
+            create_module       # scripts/module.sh
             exit 0
             ;;
         -d | --doxygen )
-            generate_doxygen_docs
+            generate_doxygen_docs   # scripts/doxygen.sh
             exit 0
             ;;
         * )
             echo "Error: Invalid option: $1"
             display_help
-            exit 1
+            exit -1
             ;;
     esac
     shift
