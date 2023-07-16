@@ -9,9 +9,10 @@ fi
 display_help() {
     echo "Usage: ./create_module.sh [options]"
     echo "Options:"
-    echo "  -b, --build                 Build the project"
+    echo "  -b, --build                  Build the project"
     echo "  -c, --clean                  Clean the build directory"
     echo "  -cb, --clean-build           Clean and build the project"
+    echo "  --continuous-build            Automatically builds on change"
     echo "  -d, --doxygen                Generate or update Doxygen documentation"
     echo "  -h, --help                   Display this help page"
     echo "  -n, --new-module             Create a new module"
