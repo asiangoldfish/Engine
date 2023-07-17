@@ -1,12 +1,13 @@
 #include "shared/Logger.h"
 
 #include "ISubject.h"
+#include "IObserver.h"
 
-void ISubject::notify()
+void ISubject::notify(ISubject *subject)
 {
 	for (auto o : observers)
 	{
-		o->onNotify();
+		o->onNotify(subject);
 	}
 }
 
