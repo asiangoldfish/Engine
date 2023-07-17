@@ -3,7 +3,7 @@
 #include "GameTime.h"
 
 
-Engine::Engine()
+Framework::Framework()
 {
 	_onInit();
 
@@ -14,24 +14,31 @@ Engine::Engine()
  * @brief Destructor
  * Deallocates and releases memory
  */
-Engine::~Engine()
+Framework::~Framework()
 {
 }
 
-void Engine::_onInit()
+void Framework::_onInit()
 {
-	Logger::debug("Starting time...");
-	
 	// Setup window properties
-	window.create(sf::VideoMode(200, 200), "Game");
+	window.create(sf::VideoMode(800, 800), "Game");
 	setFps(30);
+
+	// Logging
+	enableLogging = false;
 }
 
-void Engine::closeEngine()
+void Framework::onGameBegin()
+{
+	// Time
+	gameTime.resetTime();
+}
+
+void Framework::closeEngine()
 {
 }
 
-void Engine::stopGameLoop()
+void Framework::stopGameLoop()
 {
 	// Invoke SFML's close function
 	window.close();
@@ -43,39 +50,39 @@ void Engine::stopGameLoop()
  * This method should be called every frame to display images
  * to the screen
  */
-void Engine::draw()
+void Framework::draw()
 {
 }
 
-void Engine::clearScreen()
+void Framework::clearScreen()
 {
 	window.clear();
 }
 
-void Engine::update()
+void Framework::update()
 {
 	mousePos = sf::Mouse::getPosition(window);
 	gameTime.updateTime();
 	window.display();
 }
 
-sf::RenderWindow& Engine::getWindow()
+sf::RenderWindow& Framework::getWindow()
 {
 	return window;
 }
 
-void Engine::setTitle(std::string title)
+void Framework::setTitle(std::string title)
 {
 	windowTitle = title;
 	window.setTitle(title);
 }
 
-void Engine::setVideoMode(sf::VideoMode mode)
+void Framework::setVideoMode(sf::VideoMode mode)
 {
 	window.create(mode, windowTitle);
 }
 
-void Engine::setFps(int fps)
+void Framework::setFps(int fps)
 {
 	window.setFramerateLimit(fps);
 }

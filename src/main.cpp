@@ -6,33 +6,35 @@
 
 int main()
 {
-    // Create window
-    Engine engine;
+    // Instantiate the engine framework
+    Framework framework;
 
     // Game loop
-    while (engine.isOpen())
+    while (framework.isWindowOpen())
     {
         // Handle events
-        while (engine.pollEvent())
+        while (framework.pollEvent())
         {
-            switch (engine.getEvent().type)
+            switch (framework.getEvent().type)
             {
                 case sf::Event::Closed:
-                    engine.stopGameLoop();
+                    framework.stopGameLoop();
                     break;
 
                 case sf::Event::KeyPressed:
                     // Quit game
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-                        engine.stopGameLoop();
+                        framework.stopGameLoop();
             }
         }
 
-        engine.clearScreen();
+        framework.clearScreen();
 
-        engine.update();
+        // All draw calls go here
+
+        framework.update();
     }
 
-    engine.closeEngine();
+    framework.closeEngine();
     return 0;
 }

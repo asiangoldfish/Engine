@@ -11,7 +11,7 @@
 #include "GameTime.h"
 
 
-class Engine
+class Framework
 {
 private:
 	// Window related data
@@ -22,15 +22,29 @@ private:
 	sf::Vector2i mousePos;		///< Mouse position relative to client window
 
 	// Events
-	sf::Event event;
+	sf::Event event;			///< Current SFML event ongoing
+
+	// Logging
+	bool enableLogging;			///< If true, logs are output to file
 
 public:
 	// Time
-	GameTime gameTime;
+	GameTime gameTime;			///< Global time
 
 // Internal engine events
 private:
+	/**
+	 * @brief Initialize necessary framework components
+	 * 
+	 */
 	void _onInit();
+
+	/**
+	 * @brief Event when game has begun
+	 * 
+	 * This event is fired off after all initial setup has completed.
+	 */
+	void onGameBegin();
 
 // Initializations
 public:
@@ -40,18 +54,27 @@ public:
 	 * When using this constructor, the window must be created
 	 * manually.
 	*/
-	Engine();
+	Framework();
 
 	/**
 	* @brief Destructor
 	* 
 	* Deallocates and releases memory
 	*/
-	~Engine();
+	~Framework();
 
 	void closeEngine();
 	void stopGameLoop();
-	bool isOpen() { return window.isOpen(); }
+
+	/**
+	 * @brief Checks whether the client window is running.
+	 * 
+	 * The application is still running even if the window is closed.
+	 * This lets us cleanup resources and do other tasks.
+	 * 
+	 * @return true If the window is open, otherwise false.
+	 */
+	bool isWindowOpen() { return window.isOpen(); }
 
 public:
 	/**
@@ -72,6 +95,16 @@ public:
 
 // Events
 public:
+	/**
+	 * @brief Manage event queue.
+	 * 
+	 * Place event in a queue. As there may be several events in the
+	 * queue, the functions output signifies whether there still are
+	 * events in the queue.
+	 * 
+	 * @return true if there are remaining events to handle, otherwise
+	 * 		   false.
+	 */
 	bool pollEvent() { return window.pollEvent(event); }
 
 public:
