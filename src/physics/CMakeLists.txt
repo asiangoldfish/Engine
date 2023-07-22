@@ -10,6 +10,8 @@ add_library( physics
     Physics.cpp
     RigidBody.h
     RigidBody.cpp
+    Sprite.h
+    Sprite.cpp
 )
 
 # Include directories for the physics module (public includes)
@@ -22,4 +24,5 @@ target_link_libraries( physics PUBLIC
     sfml-system
     sfml-window
     sfml-graphics
+    core
 )
