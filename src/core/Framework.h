@@ -10,6 +10,8 @@
 #include "shared/Logger.h"
 #include "GameTime.h"
 
+class GameObject;
+class Renderable;
 
 class Framework
 {
@@ -83,7 +85,7 @@ public:
 	 * This method should be called every frame to display images
 	 * to the screen
 	*/
-	void draw();
+	void draw(sf::RectangleShape shape);
 	
 	void clearScreen();
 
@@ -118,6 +120,12 @@ public:
 	sf::Event getEvent() { return event; }
 
 	GameTime* getGameTime() { return &gameTime;  }
+	int getTimeElapsed() { return gameTime.getElapsedTime(); }
+	sf::Vector2i getMousePos() { return mousePos; }
+
+// Rendering
+public:
+	void draw(Renderable *renderable);
 };
 
 #endif

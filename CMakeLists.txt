@@ -8,8 +8,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add the subdirectory for the source code
 add_subdirectory(src)
-#add_subdirectory(tests)
-
-# Add the subdirectory for the game assets
-#add_subdirectory(assets)
 add_subdirectory(vendor)
+add_subdirectory(assets)

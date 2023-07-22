@@ -9,29 +9,31 @@
 class Tilemap
 {
 private:
-    std::vector<Tile*> tiles;
-    std::vector<sf::RectangleShape> rectShapes;
-    std::vector<Tileset*> tilesets;
-    std::vector<Sprites> sprites;
+    // Contains the tileset
+    sf::Texture tilesetTexture;
 
     // Tile size
-    float tilesize;
+    unsigned int tilesize;
+    float tileScale;
+    unsigned int mapWidth;
+    unsigned int mapHeight;
 
-    sf::Texture grass;
-    sf::Texture rock;
-    sf::Texture water;
+    std::vector<std::vector<char>> levelData;
+    sf::VertexArray vertexArray;
 
     Logger *logger;
 
 public:
-    Tilemap();
+    Tilemap(std::string tilesetPath, std::string mapPath, float _tileScale);
     virtual ~Tilemap();
+    void draw(sf::RenderTarget &target);
 
-    void draw(sf::RenderTarget* target);
+    float getTileScale() { return tileScale; }
+    void setTileScale(float newScale);
 
-public: // Tilesets
-    void addTileset(std::string filepath);
-    void loadMap();
+private:
+    // Helper function to build vertex array
+    void buildVertexArray();
 };
 
 #endif

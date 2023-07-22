@@ -1,0 +1,9 @@
+{
+    "file": "tileset_grass.png",
+    "tile_size": 16,
+    "tiles": {
+        "grass_1": "1-0",
+        "grass_2": "3-0",
+        "grass_3": "5-0"
+    }
+}

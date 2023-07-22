@@ -111,20 +111,6 @@ int Tileset::configureTileset(std::string path)
     return 0;
 }
 
-sf::RectangleShape Tileset::getRectangleShape(std::string name)
-{
-    auto pos = rectShapes.find(name);
-    if (pos == rectShapes.end())
-    {
-        // Couldn't find the sprite
-        logger->debug("Can't find the rectangle shape by name: \'" + name + "\'.");
-
-        return sf::RectangleShape();
-    }
-
-    return pos->second;
-}
-
 int Tileset::getTilesize()
 {
     return tilesize;

@@ -1,7 +1,8 @@
 #include "Framework.h"
 
-#include "GameTime.h"
-
+#include "core/GameTime.h"
+#include "core/GameObject.h"
+#include "core/Renderable.h"
 
 Framework::Framework()
 {
@@ -22,7 +23,7 @@ void Framework::_onInit()
 {
 	// Setup window properties
 	window.create(sf::VideoMode(800, 800), "Game");
-	setFps(30);
+	setFps(60);
 
 	// Logging
 	enableLogging = false;
@@ -50,8 +51,9 @@ void Framework::stopGameLoop()
  * This method should be called every frame to display images
  * to the screen
  */
-void Framework::draw()
+void Framework::draw(sf::RectangleShape shape)
 {
+	window.draw(shape);
 }
 
 void Framework::clearScreen()
@@ -85,4 +87,9 @@ void Framework::setVideoMode(sf::VideoMode mode)
 void Framework::setFps(int fps)
 {
 	window.setFramerateLimit(fps);
+}
+
+void Framework::draw(Renderable *renderable)
+{
+	renderable->draw(&window);
 }

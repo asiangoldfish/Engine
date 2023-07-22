@@ -18,6 +18,7 @@ add_subdirectory(events)
 add_subdirectory(physics)
 #add_subdirectory(rendering)
 add_subdirectory(shared)
+add_subdirectory(farmGame)
 
 # Link the modules to the main executable
 target_link_libraries(out PRIVATE
@@ -26,4 +27,21 @@ target_link_libraries(out PRIVATE
     physics 
     #rendering 
     shared
+    farmGame
+    nlohmann
+)
+
+# Internal
+target_include_directories(core PRIVATE
+    ${CMAKE_SOURCE_DIR}/vendor
+)
+
+# Add assets
+#add_custom_command(TARGET out PRE_BUILD
+#                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+#                   ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:out>/assets)
+
+# Add compile flags for Debug configuration
+target_compile_options(out PRIVATE
+    $<$<CONFIG:Debug>: -g -O0 -Wall -Wextra>
 )
