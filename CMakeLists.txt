@@ -12,3 +12,4 @@ add_subdirectory(src)
 
 # Add the subdirectory for the game assets
 #add_subdirectory(assets)
+add_subdirectory(vendor)

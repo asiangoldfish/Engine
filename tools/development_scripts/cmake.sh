@@ -32,6 +32,10 @@ function cmake_build() {
     cd "$BUILDDIR"
     cmake ..
     cmake build . && echo "Successfully built the project"
+
+    # Generate JSON compile commands for clangd lsp
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+    
     make
 }
 
