@@ -13,27 +13,13 @@ private:
 	tm ltm;						///< Time struct
 
 private:
-	Logger();
 
 	void printTime();
 	static void _log(bool includeTime);
 
 public:
-	/**
-	 * @brief Singletons should not be clonable
-	*/
-	Logger(const Logger& other) = delete;
-
-	/**
-	 * @brief Singletons should not be assignable
-	*/
-	void operator=(const Logger&) = delete;
-
-	/**
-	 * @brief Get the one and only instance
-	*/
-	static Logger& getInstance();
-
+	Logger();
+	
 	/**
 	 * Log message with date
 	 * @param msg 

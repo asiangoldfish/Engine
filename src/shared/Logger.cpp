@@ -39,27 +39,13 @@ Logger::Logger()
 	now = time(0);
 }
 
-void Logger::_log(bool includeTime)
-{
-	if (includeTime)
-	{
-		Logger::getInstance().printTime();
-	}
-}
-
-Logger& Logger::getInstance()
-{
-	static Logger instance;
-	return instance;
-}
-
 /**
  * Log message with date
  * @param msg 
 */
 void Logger::debug(std::string msg, bool includeTime)
 {
-	_log(includeTime);
+	//_log(includeTime);
 
 	// Message
 	std::cout << "DEBUG: " << msg << '\n';
@@ -67,7 +53,7 @@ void Logger::debug(std::string msg, bool includeTime)
 
 void Logger::debug(int msg, bool includeTime)
 {
-	_log(includeTime);
+	//_log(includeTime);
 
 	// Message
 	std::cout << "DEBUG: " << msg << '\n';
@@ -75,7 +61,7 @@ void Logger::debug(int msg, bool includeTime)
 
 void Logger::debug(float msg, bool includeTime)
 {
-	_log(includeTime);
+	// _log(includeTime);
 
 	// Message
 	std::cout << "DEBUG: " << msg << '\n';
@@ -83,6 +69,6 @@ void Logger::debug(float msg, bool includeTime)
 
 void Logger::debug(std::string msg, sf::Vector2f vec, bool includeTime)
 {
-	_log(includeTime);
+	// _log(includeTime);
 	std::cout << msg << "(" << vec.x << ", " << vec.y << ")" << std::endl;
 }
