@@ -1,129 +1,116 @@
-
 #include "farmGame/Tilemap.h"
-
-#include "shared/pch.h"
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <string>
-
-#include "farmGame/Tileset.h"
-#include "shared/Math.h"
 #include "Tilemap.h"
+#include "shared/pch.h"
+#include "nlohmann/json.hpp"
+#include <fstream>
 
-Tilemap::Tilemap(std::string tilesetPath, std::string mapPath, float _tileScale) : tileScale(_tileScale)
+bool Tilemap::load(const std::string& tileset, std::string mapFile)
 {
-    logger = new Logger();
-    tilesize = 16;
-    mapWidth = mapHeight = 0;
+    nlohmann::json jsonData;
+    std::ifstream infile(tileset);
+    std::string tilesetPath;
+    int tilesize;
+    std::vector<int> mapTiles;
+    int width, height = 0;      // Map size
 
-    // Load tilemap
-    if (!tilesetTexture.loadFromFile(tilesetPath))
-    {
-        // Failed to load texture
-        std::cerr 
-            << "TILESET::ERROR: Failed to load texture from \'" 
-            << tilesetPath
-            << "\'"
-            << std::endl;
-    }
-    else
-    {
-        // Set bilinear texture filtering
-        tilesetTexture.setSmooth(true);
+    //#############
+    // Load the tileset JSON configuration
+    //#############
+    if (infile) {
+        infile >> jsonData;
+        infile.close();
+    } else {
+        return false;
     }
 
-    // ---------------------------
-    // Assemble the level data
-    // ---------------------------
-    // Load the map file
-    std::ifstream mapfile;
-    mapfile.open(mapPath);
-    if (!mapfile) {
-        std::cout << "Unable to load map from \'" << mapPath << "\'" << std::endl;
+    //#############
+    // Load tileset
+    //#############
+    if (jsonData.contains("file") && jsonData["file"].is_string()) {
+        tilesetPath = jsonData["file"].get<std::string>();
+    } else {
+        std::cerr << "Failed to find key \'file\'" << std::endl;
+        return false;
+    }
+    if (!tilesetTexture.loadFromFile(tilesetPath)) {
+        return false;
     }
 
-    std::string line;
-    while (std::getline(mapfile, line))
-    {
-        // Skip empty lines
-        if (line.empty() || ( line[0] == '/' && line[1] == '/' ))
-        {
-            continue;
-        }
-        else 
-        {
-            levelData.push_back(std::vector<char>());
-        }
+    //#############
+    // Get all the tiles. We load this from a file that represents our map.
+    // Compute map height and width.
+    //#############
+    infile.open(mapFile);
+    if (!infile) {
+        std::cerr << "Failed to load \'" << mapFile << "\'" << std::endl;
+        return false;
+    } else {
+        std::string lineRead;
 
-        for (char i : line)
-        {
-            if (i == ' ' || i == '\t')
-            {
-                continue;
+        // Fetch all the integers representing each tile type and cache them
+        while (getline(infile, lineRead)) {
+            for (auto num : lineRead) {
+
+                // The ASCII character '0' starts at 48
+                mapTiles.push_back(num - 48);
             }
-            else
-            {
-                levelData[levelData.size() - 1].push_back(i);
-            }
+            height++;
+            width = lineRead.size();
         }
-        mapHeight++;
-        mapWidth = line.size();
+
+
+        infile.close();
     }
 
-    buildVertexArray();
+    // Get tilesize
+    if (jsonData.contains("tile_size") && jsonData["tile_size"].is_number_integer()) {
+        tilesize = jsonData["tile_size"].get<int>();
+    } else {
+        std::cerr << "Failed to find key \'tile_size\'" << std::endl;
+        return false;
+    }
+    // Resize the vertex array to fit the level size
+    vertices.setPrimitiveType(sf::Quads);
+    vertices.resize(width * height * 4);
+
+    // Populate the vertex array with one quad per tile
+    for (unsigned int i = 0; i < width; i++) {
+        for (unsigned int j = 0; j < height; j++) {
+            // Get the current tile number
+            int tileNumber = mapTiles[i + j * width];
+
+            // Find its position in the tileset texture
+            int tu = tileNumber & (tilesetTexture.getSize().x / tilesize);
+            int tv = tileNumber / (tilesetTexture.getSize().x / tilesize);
+
+            // Get a pointer to the current tile's quad
+            sf::Vertex* quad = &vertices[(i + j * width) * 4];
+
+            // Define the tile's 4 corners
+            quad[0].position = sf::Vector2f(i * tilesize, j * tilesize);
+            quad[1].position = sf::Vector2f((i + 1) * tilesize, j * tilesize);
+            quad[2].position = sf::Vector2f((i + 1) * tilesize, (j + 1) * tilesize);
+            quad[3].position = sf::Vector2f(i * tilesize, (j + 1) * tilesize);
+
+            // Define the 4 texture coordinates
+            quad[0].texCoords = sf::Vector2f(tu * tilesize, tv * tilesize);
+            quad[1].texCoords = sf::Vector2f((tu + 1) * tilesize, tv * tilesize);
+            quad[2].texCoords = sf::Vector2f((tu + 1) * tilesize, (tv + 1) * tilesize);
+            quad[3].texCoords = sf::Vector2f(tu * tilesize, (tv + 1) * tilesize);
+        }
+    }
+
+    return true;
 }
 
-Tilemap::~Tilemap()
+void Tilemap::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-}
-
-void Tilemap::draw(sf::RenderTarget& target)
-{
-    sf::RenderStates states;
+    // Apply the transformations
+    states.transform *= getTransform();
+    
+    // Apply the tileset texture
     states.texture = &tilesetTexture;
-    target.draw(vertexArray, states);
-}
 
-void Tilemap::buildVertexArray()
-{
-    vertexArray.setPrimitiveType(sf::Quads);
-    vertexArray.resize(mapWidth * mapHeight * 4); // 4 vertices per tile (quad)
-
-    for (unsigned int y = 0; y < mapHeight; ++y) {
-        for (unsigned int x = 0; x < mapWidth; ++x) {
-
-            // Get the tile index from levelData
-            int tileIndex = levelData[y][x];
-
-            unsigned int scaledTileSize = static_cast<unsigned int>(tilesize * tileScale);
-
-            // Calculate the position of the current tile in the vertex array
-            int vertexIndex = (x + y * mapWidth) * 4;
-            float xPos = static_cast<float>(x * tilesize);
-            float yPos = static_cast<float>(y * tilesize);
-
-            // Define the 4 vertices of the current tile
-            vertexArray[vertexIndex + 0].position = sf::Vector2f(xPos, yPos);
-            vertexArray[vertexIndex + 1].position = sf::Vector2f(xPos + scaledTileSize, yPos);
-            vertexArray[vertexIndex + 2].position = sf::Vector2f(xPos + scaledTileSize, yPos + scaledTileSize);
-            vertexArray[vertexIndex + 3].position = sf::Vector2f(xPos, yPos + scaledTileSize);
-
-            // Define the texture coordinates for the vertices
-            int textureX = tileIndex % (tilesetTexture.getSize().x / tilesize) * tilesize;
-            int textureY = tileIndex / (tilesetTexture.getSize().x / tilesize) * tilesize;
-            vertexArray[vertexIndex + 0].texCoords = sf::Vector2f(textureX, textureY);
-            vertexArray[vertexIndex + 1].texCoords = sf::Vector2f(textureX + tilesize, textureY);
-            vertexArray[vertexIndex + 2].texCoords = sf::Vector2f(textureX + tilesize, textureY + tilesize);
-            vertexArray[vertexIndex + 3].texCoords = sf::Vector2f(textureX, textureY + tilesize);
-        }
-    }
-}
-
-void Tilemap::setTileScale(float newScale)
-{
-    if (newScale > 0) {
-        tileScale = newScale;
-        buildVertexArray();
-    }
+    // Draw the vertex array
+    target.draw(vertices, states);
 }

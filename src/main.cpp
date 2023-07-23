@@ -24,9 +24,13 @@ int main()  // int argc, char * argv[])
     emitter->setMaxLifeTime(1.f);
     emitter->setLifeVariance(0.2f);
 
-    Tilemap* tilemap = new Tilemap("assets/textures/tilesets/tileset_grass.png", "assets/maps/map.dta", 1.f);
 
     //return 0;
+    Tilemap map;
+    if (!map.load("assets/textures/tilesets/tileset_grass.json", "assets/maps/map.dta"))
+    {
+        return -1;
+    }
 
     // Game loop
     while (framework.isWindowOpen()) {
@@ -52,7 +56,7 @@ int main()  // int argc, char * argv[])
         // float mouseX, mouseY;
         // mouseX = framework.getMousePos().x;
         // mouseY = framework.getMousePos().y;
-        tilemap->draw(framework.getWindow());
+        framework.getWindow().draw(map);
         
         framework.update();
     }

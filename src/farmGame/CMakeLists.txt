@@ -21,6 +21,7 @@ target_include_directories( farmGame PRIVATE
 # Internal
 target_include_directories(farmGame PRIVATE
     ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/vendor
 )
 
 # Link SFML to the core module
