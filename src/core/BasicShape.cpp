@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "BasicShape.h"
+#include "core/BasicShape.h"
 
 void BasicShape::constructShape()
 {
@@ -61,8 +62,7 @@ bool BasicShape::contains(sf::Vector2f point)
         point.y >= this->vertices[0].position.y &&
 
         // Bottom border
-        point.y <= this->vertices[0].position.y + size.y
-        ;
+        point.y <= this->vertices[0].position.y + size.y;
 }
 
 bool BasicShape::contains(sf::Vector2i point)
@@ -86,8 +86,7 @@ bool BasicShape::isOverlapping(BasicShape target)
         target.getPosition().y + target.getSize().y >= this->vertices[1].position.y &&
 
         // Bottom border
-        target.getPosition().y <= this->vertices[2].position.y
-        ;
+        target.getPosition().y <= this->vertices[2].position.y;
 }
 
 void BasicShape::setColor(sf::Color color)
@@ -103,6 +102,11 @@ void BasicShape::setColor(sf::Color color)
 
     // Vertex 4 - Bottom left
     vertices[3].color = color;
+}
+
+void BasicShape::setColor(float r, float g, float b)
+{
+    setColor(sf::Color(r, g, b));
 }
 
 sf::Vector2f BasicShape::getPosition()
@@ -134,7 +138,6 @@ void BasicShape::setSize(float size)
 {
     setSize({ size, size });
 }
-
 
 sf::Vector2f BasicShape::getSize()
 {

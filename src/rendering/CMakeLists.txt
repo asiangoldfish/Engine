@@ -1,35 +1,29 @@
-# Define the module name
+# ProjectRoot/src/core/CMakeLists.txt
 set(MODULE_NAME rendering)
 
-# Add all source files in the module directory
-file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
-
-# Create the module library
-add_library(${MODULE_NAME} ${SOURCES} ${HEADERS})
-
-# Add include directories for the module
-target_include_directories(${MODULE_NAME}
-  PUBLIC
-    include
-  PRIVATE
-    src
+# Define the core module target
+add_library(${MODULE_NAME}
+    BasicShape.h
+    Framework.h
+    GameTime.h
+    BasicShape.cpp
+    Framework.cpp
+    GameTime.cpp
 )
 
-# Link the necessary libraries (e.g., OpenGL, GLAD, GLM)
-#target_link_libraries(${MODULE_NAME} PUBLIC OpenGL::GL GLAD::GLAD glm)
+# Include directories for the core module (public includes)
+target_include_directories(${MODULE_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
-# Find SFML package
-find_package(SFML REQUIRED system window graphics audio)
+# Internal
+target_include_directories(${MODULE_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
 
-# Link SFML with your game engine
-target_link_libraries(${MODULE_NAME} PRIVATE sfml-system sfml-window sfml-graphics sfml-audio)
-
-# Set any additional compiler flags or options if needed
-# target_compile_options(${MODULE_NAME} PRIVATE ...)
-
-# Set any preprocessor definitions if needed
-# target_compile_definitions(${MODULE_NAME} PRIVATE ...)
-
-# Set the module output directory (optional)
-# set_target_properties(${MODULE_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/modules")
+# Link SFML to the core module
+target_link_libraries(${MODULE_NAME} PUBLIC 
+    sfml-system
+    sfml-window
+    sfml-graphics
+)

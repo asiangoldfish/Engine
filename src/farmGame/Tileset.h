@@ -25,6 +25,7 @@ private:
     std::vector<sf::IntRect*> subrects;
     std::map<std::string, sf::RectangleShape> rectShapes;
 
+
 public:
     Tileset();
     Tileset(std::string path);

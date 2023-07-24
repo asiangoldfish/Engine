@@ -3,11 +3,17 @@
 # Define the core module target
 add_library( core
     BasicShape.h
-    Framework.h
-    GameTime.h
     BasicShape.cpp
+    Camera.h
+    Camera.cpp
+    Framework.h
     Framework.cpp
+    GameObject.h
+    GameObject.cpp
+    GameTime.h
     GameTime.cpp
+    Renderable.h
+    Renderable.cpp
 )
 
 # Include directories for the core module (public includes)
