@@ -17,6 +17,9 @@ Framework::Framework()
  */
 Framework::~Framework()
 {
+	if (camera) {
+		delete camera;
+	}
 }
 
 void Framework::_onInit()
@@ -27,6 +30,7 @@ void Framework::_onInit()
 
 	// Logging
 	enableLogging = false;
+	camera = new Camera(window);
 }
 
 void Framework::onGameBegin()
@@ -63,7 +67,10 @@ void Framework::clearScreen()
 
 void Framework::update()
 {
+	// Set mouse positions
 	mousePos = sf::Mouse::getPosition(window);
+	mouseWorldPos = window.mapPixelToCoords(mousePos, window.getView());
+
 	gameTime.updateTime();
 	window.display();
 }

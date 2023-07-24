@@ -9,6 +9,7 @@
 #include "shared/Math.h"
 #include "shared/Logger.h"
 #include "GameTime.h"
+#include "Camera.h"
 
 class GameObject;
 class Renderable;
@@ -22,12 +23,15 @@ private:
 
 	// Mouse
 	sf::Vector2i mousePos;		///< Mouse position relative to client window
+	sf::Vector2f mouseWorldPos;	///< Mouse position in the game world
 
 	// Events
 	sf::Event event;			///< Current SFML event ongoing
 
 	// Logging
 	bool enableLogging;			///< If true, logs are output to file
+
+	Camera *camera;
 
 public:
 	// Time
@@ -122,6 +126,13 @@ public:
 	GameTime* getGameTime() { return &gameTime;  }
 	int getTimeElapsed() { return gameTime.getElapsedTime(); }
 	sf::Vector2i getMousePos() { return mousePos; }
+	sf::Vector2f getMouseWorldPos() { return mouseWorldPos; }
+
+// Camera
+public:
+	void moveCamera(float x, float y) { camera->moveCamera(x, y, window); }
+	void zoomCamera(float delta) { camera->zoom(delta, window); }
+
 
 // Rendering
 public:
