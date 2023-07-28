@@ -13,5 +13,7 @@
 #include <sstream>
 #include <vector>
 #include <cctype>
+#include <memory>
+
 
 #endif

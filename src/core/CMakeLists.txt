@@ -14,6 +14,8 @@ add_library( core
     GameTime.cpp
     Renderable.h
     Renderable.cpp
+    ResourceHolder.inl
+    ResourceHolder.hpp
 )
 
 # Include directories for the core module (public includes)
@@ -24,6 +26,7 @@ target_include_directories( core PRIVATE
 # Internal
 target_include_directories(core PRIVATE
     ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/vendor
 )
 
 # Link SFML to the core module
