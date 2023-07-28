@@ -14,6 +14,7 @@ display_help() {
     echo "  -cb, --clean-build           Clean and build the project"
     echo "  --continuous-build           Automatically builds on change"
     echo "  -d, --doxygen                Generate or update Doxygen documentation"
+    echo "  -do,--doxygen-open           Open Doxygen documentation in default browser"
     echo "  --docs-local-server          Run local server developing the documentation website"
     echo "  -h, --help                   Display this help page"
     echo "  -n, --new-module             Create a new module"

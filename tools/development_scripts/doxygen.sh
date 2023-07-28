@@ -10,10 +10,21 @@ generate_doxygen_docs() {
     # Check that doxygen is installed
     command -v doxygen &> /dev/null || { echo "Doxygen is not installed" && exit -1; }
 
-    echo "Generating/Updating Doxygen documentation..."
-
-    doxygen -g Doxyfile
     doxygen Doxyfile
 
     echo "Doxygen documentation has been generated/updated."
+}
+
+open_docs() {
+    if [ -z "$BROWSER" ]; then
+        echo "Default browser was not found. Set environment variable BROWSER to browser's binary path"
+        exit -1
+    elif [ ! -f "doxygen-docs/html/index.html" ]; then
+        echo "Unable to find Doxygen documentation. Generate it with the following command:"
+        echo "./util.sh --doxygen"
+
+        exit -1
+    else
+        "$BROWSER" "doxygen-docs/html/index.html"
+    fi
 }

@@ -45,6 +45,10 @@ while [ "$1" != "" ]; do
             generate_doxygen_docs   # scripts/doxygen.sh
             exit 0
             ;;
+        -do | --doxygen-open )
+            open_docs
+            exit 0
+            ;;
         --docs-local-server )
             cd "$DIRPATH/docs"
             bash devserver.sh
